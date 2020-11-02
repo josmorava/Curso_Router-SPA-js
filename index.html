@@ -27,13 +27,14 @@
   </style>
   <body>
     <header class="menu">
-      <div class="menu--item" onclick="">
+      <div class="menu--item" onclick="router.loadRoute('')">
         <p>Home</p>
       </div>
-      <div class="menu--item" onclick="">
+      <!-- carga el metodo load route que manda el path que es la ruta donde estamos a la que queremos ir -->
+      <div class="menu--item" onclick="router.loadRoute('contacto')">
         <p>Contacto</p>
       </div>
-      <div class="menu--item" onclick="">
+      <div class="menu--item" onclick="router.loadRoute('')">
         <p>About me</p>
       </div>
     </header>
