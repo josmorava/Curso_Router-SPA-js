@@ -3,6 +3,18 @@ class Router {
     this.routes = router;
     this._loadInitialRoute();
   }
+  //Toma los segmentos de la url
+  loadRoute(){
+    const matchedRoute = this._matchUrlToRoute(urlSegs);
+    const url = `/${urlSegs.join('/')}`;
+
+    //cambio de url en el navegador
+    history.pushState({},'this works',url);
+
+    const routerOutElm = document.querySelectorAll('[data-router]')[0];
+    routerOutElm.innerHTML = matchedRoute.template;
+  }
+
   //apuntador a los elementos de inicio
   _matchUrlToRoute(urlSegs){
     const _matchUrlToRoute = this.routes.find(route => {
