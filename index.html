@@ -28,19 +28,22 @@
 
   <body>
     <header class="menu">
+      <!-- carga el metodo load route que manda el path que es la ruta donde estamos a la que queremos ir -->
       <div class="menu--item" onclick="router.loadRoute('')">
         <p>Home</p>
       </div>
-      <!-- carga el metodo load route que manda el path que es la ruta donde estamos a la que queremos ir -->
-      <div class="menu--item" onclick="router.loadRoute('contacto')">
+      <div class="menu--item" onclick="router.loadRoute('contacto')" >
         <p>Contacto</p>
       </div>
-      <div class="menu--item" onclick="router.loadRoute('')">
+      <div class="menu--item" onclick="router.loadRoute('aboutme')" >
         <p>About me</p>
       </div>
     </header>
 
-    <div data-router>
-    </div>
+    <div data-router></div>
+
+  <script src="./routes.js"></script>
+  <script src="./router.js"></script>
+  <script src="./index.js"></script>
 </body>
 </html>

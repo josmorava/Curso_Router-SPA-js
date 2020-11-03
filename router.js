@@ -1,43 +1,35 @@
 class Router {
   constructor(routes) {
-    this.routes = router;
-    this._loadInitialRoute();
-  }
-  //Toma los segmentos de la url
-  loadRoute(){
-    const matchedRoute = this._matchUrlToRoute(urlSegs);
-    const url = `/${urlSegs.join('/')}`;
-
-    //cambio de url en el navegador
-    history.pushState({},'this works',url);
-
-    const routerOutElm = document.querySelectorAll('[data-router]')[0];
-    routerOutElm.innerHTML = matchedRoute.template;
+      this.routes = routes;
+      this._loadInitialRoute();
   }
 
-  //apuntador a los elementos de inicio
-  _matchUrlToRoute(urlSegs){
-    const _matchUrlToRoute = this.routes.find(route => {
-      //Seperar lo que está después del path o / para sacar lo que está despues del /
-      const routePathSegs = route.path.split('/').slice(1)
+loadRoute(...urlSegs){
+  const matchedRoute = this._matchUrlToRoute(urlSegs);
+  const url = `/${urlSegs.join("/")}`;
+  history.pushState({},'this works', url);
+  const routerOutElment = document.querySelectorAll("[data-router]")[0];
+  routerOutElment.innerHTML = matchedRoute.template;
+}
 
+_matchUrlToRoute(urlSegs){
+  const matchedRoute = this.routes.find((route) => {
+      const routePathSegs = route.path.split("/").slice(1);
       if (routePathSegs.length !== urlSegs.length){
-        return false;
+          return false;
       }
+      return routePathSegs.every((routePathSeg, i) => routePathSeg === urlSegs[i]
+      );
+  });
+  return matchedRoute;
+}
 
-      return routePathSegs
-        .every((routePathSeg, i) => routePathSegs === urlSegs[i]);
-    });
-    return matchedRoute;
+
+_loadInitialRoute() {
+  const pathNameSplit = window.location.pathname.split("/");
+  const pathSegs = pathNameSplit.length > 1 ? pathNameSplit.slice(1): '';
+
+  this.loadRoute(...pathSegs);
   }
+}
 
-
-  //para que detecte en que pag estamos/template
-  _loadInitialRoute() {//Separar todo por / 
-    const pathNameSplit = window.location.pathname.split('/');
-    const pathSegs = pathNameSplit.length > 1 ? pathNameSplit(1) : '';
-    
-    //guarda la ruta actual, donde estamos
-    this.loadRoute(...pathSegs);
-  };
-};
